@@ -1,11 +1,11 @@
 # Opt2018.1
 Only for optimize purpose...
 
-Excel type
-*row 0 : type
-*row 1 : describe(costum)
-*row 2 : fieldName
-*from row 3 : data
+## Excel type :
+* **row 0** : filed type
+* **row 1** : describe(costum)
+* **row 2** : field name
+* **from row 3** : data
 
 # Unity-QuickSheet
 
