@@ -90,7 +90,7 @@ namespace UnityQuickSheet
 
         string GetHeaderColumnName(int cellnum)
         {
-            ICell headerCell = sheet.GetRow(0).GetCell(cellnum);
+            ICell headerCell = sheet.GetRow(2).GetCell(cellnum);
             if (headerCell != null)
                 return headerCell.StringCellValue;
             return string.Empty;
@@ -129,12 +129,19 @@ namespace UnityQuickSheet
                     {
                         try
                         {
-                            var value = ConvertFrom(cell, property.PropertyType);
-                            property.SetValue(item, value, null);
+                            if (cell == null)
+                            {
+                                property.SetValue(item, null, null);
+                            }
+                            else
+                            {
+                                var value = ConvertFrom(cell, property.PropertyType);
+                                property.SetValue(item, value, null);
+                            }
                         }
                         catch (Exception e)
                         {
-                            string pos = string.Format("Row[{0}], Cell[{1}]", (current).ToString(), GetHeaderColumnName(i));
+                            string pos = string.Format("Row[{0}], Cell[{1}]", current, i);
                             Debug.LogError(string.Format("Excel File {0} Deserialize Exception: {1} at {2}", this.filepath, e.Message, pos));
                         }
                     }
@@ -342,7 +349,6 @@ namespace UnityQuickSheet
             else
             {
                 type = CellType.Undefined;
-                Debug.LogError("Wrong cell type is defined: " + typedef);
             }
             return type;
         }

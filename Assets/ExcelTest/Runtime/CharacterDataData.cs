@@ -41,7 +41,7 @@ public class CharacterDataData
   public string Runactionkey { get {return runactionkey; } set { runactionkey = value;} }
   
   [SerializeField]
-  string[] battleactionlist = new string[0];
-  public string[] Battleactionlist { get {return battleactionlist; } set { battleactionlist = value;} }
+  string battleactionlist;
+  public string Battleactionlist { get {return battleactionlist; } set { battleactionlist = value;} }
   
 }

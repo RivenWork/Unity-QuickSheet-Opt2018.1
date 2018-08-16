@@ -152,7 +152,7 @@ namespace UnityQuickSheet
             GUILayout.Label("Path Settings:", headerStyle);
             GUILayout.BeginHorizontal();
             machine.TemplatePath = EditorGUILayout.TextField("Template:", machine.TemplatePath);
-            if (GUILayout.Button("Browse"))
+            if (GUILayout.Button("Browse", GUILayout.Width(60)))
             {
                 var p = EditorUtility.OpenFolderPanel("Template:", machine.TemplatePath, string.Empty);
                 if (!string.IsNullOrEmpty(p))
@@ -161,7 +161,7 @@ namespace UnityQuickSheet
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             machine.RuntimeClassPath = EditorGUILayout.TextField("Runtime:", machine.RuntimeClassPath);
-            if (GUILayout.Button("Browse"))
+            if (GUILayout.Button("Browse", GUILayout.Width(60)))
             {
                 var p = EditorUtility.OpenFolderPanel("Runtime:", machine.RuntimeClassPath, string.Empty);
                 if (!string.IsNullOrEmpty(p))
@@ -170,7 +170,7 @@ namespace UnityQuickSheet
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             machine.EditorClassPath = EditorGUILayout.TextField("Editor:", machine.EditorClassPath);
-            if (GUILayout.Button("Browse"))
+            if (GUILayout.Button("Browse", GUILayout.Width(60)))
             {
                 var p = EditorUtility.OpenFolderPanel("Editor:", machine.EditorClassPath, string.Empty);
                 if (!string.IsNullOrEmpty(p))
@@ -179,7 +179,7 @@ namespace UnityQuickSheet
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             machine.DataFilePath = EditorGUILayout.TextField("Data:", machine.DataFilePath);
-            if (GUILayout.Button("Browse"))
+            if (GUILayout.Button("Browse", GUILayout.Width(60)))
             {
                 var p = EditorUtility.OpenFolderPanel("Data:", machine.DataFilePath, string.Empty);
                 if (!string.IsNullOrEmpty(p))
