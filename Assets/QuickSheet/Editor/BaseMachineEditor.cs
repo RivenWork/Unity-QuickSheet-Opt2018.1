@@ -395,5 +395,12 @@ namespace UnityQuickSheet
 
             return new ColumnHeader { name = cHeader, type = CellType.Undefined, OrderNO = order };
         }
+
+        protected ColumnHeader ParseColumnHeader(string columnheader, CellType type, int order)
+        {
+            // remove all white space. e.g.) "SkillLevel | uint"
+            string cHeader = new string(columnheader.ToCharArray().Where(c => !Char.IsWhiteSpace(c)).ToArray());
+            return new ColumnHeader { name = cHeader, type = type, OrderNO = order };
+        }
     }
 }

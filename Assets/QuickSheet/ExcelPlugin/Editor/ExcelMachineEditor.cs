@@ -150,11 +150,42 @@ namespace UnityQuickSheet
             EditorGUILayout.Separator();
 
             GUILayout.Label("Path Settings:", headerStyle);
-
-            machine.TemplatePath = EditorGUILayout.TextField("Template: ", machine.TemplatePath);
-            machine.RuntimeClassPath = EditorGUILayout.TextField("Runtime: ", machine.RuntimeClassPath);
+            GUILayout.BeginHorizontal();
+            machine.TemplatePath = EditorGUILayout.TextField("Template:", machine.TemplatePath);
+            if (GUILayout.Button("Browse"))
+            {
+                var p = EditorUtility.OpenFolderPanel("Template:", machine.TemplatePath, string.Empty);
+                if (!string.IsNullOrEmpty(p))
+                    machine.TemplatePath = p.Substring(p.IndexOf("/Assets/") + "/Assets/".Length);
+            }
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            machine.RuntimeClassPath = EditorGUILayout.TextField("Runtime:", machine.RuntimeClassPath);
+            if (GUILayout.Button("Browse"))
+            {
+                var p = EditorUtility.OpenFolderPanel("Runtime:", machine.RuntimeClassPath, string.Empty);
+                if (!string.IsNullOrEmpty(p))
+                    machine.RuntimeClassPath = p.Substring(p.IndexOf("/Assets/") + "/Assets/".Length);
+            }
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
             machine.EditorClassPath = EditorGUILayout.TextField("Editor:", machine.EditorClassPath);
-            //machine.DataFilePath = EditorGUILayout.TextField("Data:", machine.DataFilePath);
+            if (GUILayout.Button("Browse"))
+            {
+                var p = EditorUtility.OpenFolderPanel("Editor:", machine.EditorClassPath, string.Empty);
+                if (!string.IsNullOrEmpty(p))
+                    machine.EditorClassPath = p.Substring(p.IndexOf("/Assets/") + "/Assets/".Length);
+            }
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            machine.DataFilePath = EditorGUILayout.TextField("Data:", machine.DataFilePath);
+            if (GUILayout.Button("Browse"))
+            {
+                var p = EditorUtility.OpenFolderPanel("Data:", machine.DataFilePath, string.Empty);
+                if (!string.IsNullOrEmpty(p))
+                    machine.DataFilePath = p.Substring(p.IndexOf("/Assets/") + "/Assets/".Length);
+            }
+            GUILayout.EndHorizontal();
 
             machine.onlyCreateDataClass = EditorGUILayout.Toggle("Only DataClass", machine.onlyCreateDataClass);
 
@@ -210,10 +241,9 @@ namespace UnityQuickSheet
                 return;
             }
 
-            int startRowIndex = 0;
             string error = string.Empty;
-            var titles = new ExcelQuery(path, sheet).GetTitle(startRowIndex, ref error);
-            if (titles == null || !string.IsNullOrEmpty(error))
+            var titleDic = new ExcelQuery(path, sheet).GetTitle(ref error);
+            if (titleDic == null || !string.IsNullOrEmpty(error))
             {
                 EditorUtility.DisplayDialog("Error", error, "OK");
                 return;
@@ -221,9 +251,9 @@ namespace UnityQuickSheet
             else
             {
                 // check the column header is valid
-                foreach(string column in titles)
+                foreach(var column in titleDic)
                 {
-                    if (!IsValidHeader(column))
+                    if (!IsValidHeader(column.Key))
                     {
                         error = string.Format(@"Invalid column header name {0}. Any c# keyword should not be used for column header. Note it is not case sensitive.", column);
                         EditorUtility.DisplayDialog("Error", error, "OK");
@@ -232,22 +262,19 @@ namespace UnityQuickSheet
                 }
             }
 
-            List<string> titleList = titles.ToList();
-
+            var titleList = titleDic.Keys.ToList();
             if (machine.HasColumnHeader() && reimport == false)
             {
                 var headerDic = machine.ColumnHeaderList.ToDictionary(header => header.name);
 
                 // collect non-changed column headers
-                var exist = titleList.Select(t => GetColumnHeaderString(t))
-                    .Where(e => headerDic.ContainsKey(e) == true)
-                    .Select(t => new ColumnHeader { name = t, type = headerDic[t].type, isArray = headerDic[t].isArray, OrderNO = headerDic[t].OrderNO });
+                var exist = titleDic.Where(e => headerDic.ContainsKey(e.Key) && headerDic[e.Key].type == e.Value)
+                    .Select(t => new ColumnHeader { name = t.Key, type = t.Value, isArray = headerDic[t.Key].isArray, OrderNO = headerDic[t.Key].OrderNO });
 
                 
                 // collect newly added or changed column headers
-                var changed = titleList.Select(t => GetColumnHeaderString(t))
-                    .Where(e => headerDic.ContainsKey(e) == false)
-                    .Select(t => ParseColumnHeader(t, titleList.IndexOf(t)));
+                var changed = titleDic.Where(e => !headerDic.ContainsKey(e.Key) || headerDic[e.Key].type != e.Value)
+                    .Select(t => ParseColumnHeader(t.Key, t.Value, titleList.IndexOf(t.Key)));
 
                 // merge two list via LINQ
                 var merged = exist.Union(changed).OrderBy(x => x.OrderNO);
@@ -258,10 +285,10 @@ namespace UnityQuickSheet
             else
             {
                 machine.ColumnHeaderList.Clear();
-                if (titleList.Count > 0)
+                if (titleDic.Count > 0)
                 {
                     int order = 0;
-                    machine.ColumnHeaderList = titleList.Select(e => ParseColumnHeader(e, order++)).ToList();
+                    machine.ColumnHeaderList = titleDic.Select(e => ParseColumnHeader(e.Key, e.Value, order++)).ToList();
                 }
                 else
                 {
@@ -289,7 +316,7 @@ namespace UnityQuickSheet
             sp.importedFilePath = machine.excelFilePath;
 
             // path where the .asset file will be created.
-            string path = Path.GetDirectoryName(machine.excelFilePath);
+            string path = machine.DataFilePath;
             path += "/" + machine.WorkSheetName + ".asset";
             sp.assetFilepath = path;
             sp.assetPostprocessorClass = machine.WorkSheetName + "AssetPostprocessor";

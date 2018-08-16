@@ -103,7 +103,7 @@ namespace UnityQuickSheet
         ///     The first row of a sheet is header column which is not the actual value
         ///     so it skips when it deserializes.
         /// </summary>
-        public List<T> Deserialize<T>(int start = 1)
+        public List<T> Deserialize<T>(int start = 3)
         {
             var t = typeof(T);
             PropertyInfo[] p = t.GetProperties();
@@ -200,6 +200,36 @@ namespace UnityQuickSheet
             return null;
         }
 
+        public Dictionary<string, CellType> GetTitle(ref string error)
+        {
+            var result = new Dictionary<string, CellType>();
+
+            IRow title = sheet.GetRow(2);
+            IRow type = sheet.GetRow(0);
+            if (title != null)
+            {
+                for (int i = 0; i < title.LastCellNum; i++)
+                {
+                    string value = title.GetCell(i).StringCellValue;
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        // null or empty column is found. Note column index starts from 0.
+                        Debug.LogWarningFormat("Null or empty column is found at {0}.The celltype of {0} is '{1}' type.\n", i, title.GetCell(i).CellType);
+                    }
+                    else
+                    {
+                        // column header is not an empty string, we check its validation later.
+                        result.Add(value, ParseType(type.GetCell(i).StringCellValue));
+                    }
+                }
+
+                return result;
+            }
+
+            error = string.Format(@"Empty row at {0}", 2);
+            return null;
+        }
+
         /// <summary>
         /// Convert type of cell value to its predefined type which is specified in the sheet's ScriptMachine setting file.
         /// </summary>
@@ -290,6 +320,31 @@ namespace UnityQuickSheet
 
             // for all other types, convert its corresponding type.
             return Convert.ChangeType(value, t);
+        }
+
+        CellType ParseType(string typedef)
+        {
+            CellType type;
+            if (string.Compare(typedef, "int") == 0)
+                type = CellType.Int;
+            if (string.Compare(typedef, "long") == 0)
+                type = CellType.Long;
+            else if (string.Compare(typedef, "string") == 0)
+                type = CellType.String;
+            else if (string.Compare(typedef, "float") == 0)
+                type = CellType.Float;
+            else if (string.Compare(typedef, "double") == 0)
+                type = CellType.Double;
+            else if (string.Compare(typedef, "enum") == 0)
+                type = CellType.Enum;
+            else if (string.Compare(typedef, "bool") == 0)
+                type = CellType.Bool;
+            else
+            {
+                type = CellType.Undefined;
+                Debug.LogError("Wrong cell type is defined: " + typedef);
+            }
+            return type;
         }
     }
 }

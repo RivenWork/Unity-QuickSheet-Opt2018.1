@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using System.IO;
@@ -7,11 +7,11 @@ using UnityQuickSheet;
 ///
 /// !!! Machine generated code !!!
 ///
-public class $AssetPostprocessorClass : AssetPostprocessor 
+public class CharacterDataAssetPostprocessor : AssetPostprocessor 
 {
-    private static readonly string filePath = "$IMPORT_PATH";
-    private static readonly string assetFilePath = "$ASSET_PATH";
-    private static readonly string sheetName = "$ClassName";
+    private static readonly string filePath = "Assets/ExcelTest/Character.xlsx";
+    private static readonly string assetFilePath = "ExcelTest/Data/CharacterData.asset";
+    private static readonly string sheetName = "CharacterData";
     
     static void OnPostprocessAllAssets (string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
@@ -20,16 +20,16 @@ public class $AssetPostprocessorClass : AssetPostprocessor
             if (!filePath.Equals (asset))
                 continue;
                 
-            $ClassName data = ($ClassName)AssetDatabase.LoadAssetAtPath (assetFilePath, typeof($ClassName));
+            CharacterData data = (CharacterData)AssetDatabase.LoadAssetAtPath (assetFilePath, typeof(CharacterData));
             if (data == null) {
-                data = ScriptableObject.CreateInstance<$ClassName> ();
+                data = ScriptableObject.CreateInstance<CharacterData> ();
                 data.SheetName = filePath;
                 data.WorksheetName = sheetName;
                 AssetDatabase.CreateAsset (data, assetFilePath);
                 //data.hideFlags = HideFlags.NotEditable;
             }
             
-            //data.dataArray = new ExcelQuery(filePath, sheetName).Deserialize<$DataClassName>().ToArray();		
+            //data.dataArray = new ExcelQuery(filePath, sheetName).Deserialize<CharacterDataData>().ToArray();		
 
             //ScriptableObject obj = AssetDatabase.LoadAssetAtPath (assetFilePath, typeof(ScriptableObject)) as ScriptableObject;
             //EditorUtility.SetDirty (obj);
@@ -37,7 +37,7 @@ public class $AssetPostprocessorClass : AssetPostprocessor
             ExcelQuery query = new ExcelQuery(filePath, sheetName);
             if (query != null && query.IsValid())
             {
-                data.dataArray = query.Deserialize<$DataClassName>().ToArray();
+                data.dataArray = query.Deserialize<CharacterDataData>().ToArray();
                 ScriptableObject obj = AssetDatabase.LoadAssetAtPath (assetFilePath, typeof(ScriptableObject)) as ScriptableObject;
                 EditorUtility.SetDirty (obj);
             }

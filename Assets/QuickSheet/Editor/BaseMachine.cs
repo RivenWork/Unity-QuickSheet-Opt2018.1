@@ -65,6 +65,8 @@ namespace UnityQuickSheet
             set { editorScriptFilePath = value; }
         }
 
+        public string DataFilePath { get; set; }
+
         [SerializeField]
         private string sheetName;
         public string SpreadSheetName
