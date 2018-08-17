@@ -211,6 +211,9 @@ namespace UnityQuickSheet
                     Debug.LogError("Failed to create a script from excel.");
             }
 
+            if (GUILayout.Button("Generate Data"))
+                AssetDatabase.ImportAsset(machine.excelFilePath, ImportAssetOptions.ForceUpdate | ImportAssetOptions.ForceSynchronousImport);
+
             if (GUI.changed)
             {
                 EditorUtility.SetDirty(machine);

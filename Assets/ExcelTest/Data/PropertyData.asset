@@ -13,8 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SheetName: Assets/ExcelTest/Character.xlsx
   WorksheetName: PropertyData
-  dataArray:
-  - propertyid: 1001
-    propertytype: 111
-    hpmax: 0
-    spmax: 1
+  dataArray: []

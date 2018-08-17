@@ -13,22 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SheetName: Assets/ExcelTest/Character.xlsx
   WorksheetName: CharacterData
-  dataArray:
-  - characteruniquename: Saber
-    avatarobjectprefab: character01
-    horizontalspeed: 2
-    verticalspeed: 2
-    idleactionkey: idle
-    deathactionkey: death
-    walkactionkey: walk
-    runactionkey: run
-    battleactionlist: attack_d1,attack_2,attack_3,attack_4,attack_5,attack_d2
-  - characteruniquename: GenKo
-    avatarobjectprefab: GenKo
-    horizontalspeed: 3
-    verticalspeed: 2
-    idleactionkey: idle
-    deathactionkey: death
-    walkactionkey: walk
-    runactionkey: run
-    battleactionlist: Genko_attack_1,Genko_attack_2,Genko_attack_3,Genko_attack_4
+  dataArray: []
