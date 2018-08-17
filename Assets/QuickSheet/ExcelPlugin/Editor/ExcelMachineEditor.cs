@@ -245,8 +245,8 @@ namespace UnityQuickSheet
             }
 
             string error = string.Empty;
-            var titleDic = new ExcelQuery(path, sheet).GetTitle(ref error);
-            if (titleDic == null || !string.IsNullOrEmpty(error))
+            var rowList = new ExcelQuery(path, sheet).GetTitle(ref error);
+            if (rowList == null || !string.IsNullOrEmpty(error))
             {
                 EditorUtility.DisplayDialog("Error", error, "OK");
                 return;
@@ -254,9 +254,9 @@ namespace UnityQuickSheet
             else
             {
                 // check the column header is valid
-                foreach(var column in titleDic)
+                foreach(var column in rowList)
                 {
-                    if (!IsValidHeader(column.Key))
+                    if (!IsValidHeader(column.Name))
                     {
                         error = string.Format(@"Invalid column header name {0}. Any c# keyword should not be used for column header. Note it is not case sensitive.", column);
                         EditorUtility.DisplayDialog("Error", error, "OK");
@@ -265,19 +265,19 @@ namespace UnityQuickSheet
                 }
             }
 
-            var titleList = titleDic.Keys.ToList();
+            var titleList = rowList.Select(e => e.Name).ToList();
             if (machine.HasColumnHeader() && reimport == false)
             {
                 var headerDic = machine.ColumnHeaderList.ToDictionary(header => header.name);
 
                 // collect non-changed column headers
-                var exist = titleDic.Where(e => headerDic.ContainsKey(e.Key) && headerDic[e.Key].type == e.Value)
-                    .Select(t => new ColumnHeader { name = t.Key, type = t.Value, isArray = headerDic[t.Key].isArray, OrderNO = headerDic[t.Key].OrderNO });
+                var exist = rowList.Where(e => headerDic.ContainsKey(e.Name) && headerDic[e.Name].type == e.type)
+                    .Select(t => new ColumnHeader { name = t.Name, type = t.type, isArray = headerDic[t.Name].isArray, OrderNO = headerDic[t.Name].OrderNO });
 
                 
                 // collect newly added or changed column headers
-                var changed = titleDic.Where(e => !headerDic.ContainsKey(e.Key) || headerDic[e.Key].type != e.Value)
-                    .Select(t => ParseColumnHeader(t.Key, t.Value, titleList.IndexOf(t.Key)));
+                var changed = rowList.Where(e => !headerDic.ContainsKey(e.Name) || headerDic[e.Name].type != e.type)
+                    .Select(t => ParseColumnHeader(t, titleList.IndexOf(t.Name)));
 
                 // merge two list via LINQ
                 var merged = exist.Union(changed).OrderBy(x => x.OrderNO);
@@ -288,10 +288,10 @@ namespace UnityQuickSheet
             else
             {
                 machine.ColumnHeaderList.Clear();
-                if (titleDic.Count > 0)
+                if (rowList.Count > 0)
                 {
                     int order = 0;
-                    machine.ColumnHeaderList = titleDic.Select(e => ParseColumnHeader(e.Key, e.Value, order++)).ToList();
+                    machine.ColumnHeaderList = rowList.Select(e => ParseColumnHeader(e, order++)).ToList();
                 }
                 else
                 {

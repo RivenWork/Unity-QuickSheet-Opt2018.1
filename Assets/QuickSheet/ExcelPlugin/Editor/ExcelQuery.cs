@@ -207,9 +207,9 @@ namespace UnityQuickSheet
             return null;
         }
 
-        public Dictionary<string, CellType> GetTitle(ref string error)
+        public List<MemberFieldData> GetTitle(ref string error)
         {
-            var result = new Dictionary<string, CellType>();
+            var result = new List<MemberFieldData>();
 
             IRow title = sheet.GetRow(2);
             IRow type = sheet.GetRow(0);
@@ -226,7 +226,8 @@ namespace UnityQuickSheet
                     else
                     {
                         // column header is not an empty string, we check its validation later.
-                        result.Add(value, ParseType(type.GetCell(i).StringCellValue));
+                        var typeValue = type.GetCell(i).StringCellValue;
+                        result.Add(new MemberFieldData() { Name = value, type = ParseType(typeValue), IsArrayType = typeValue.IndexOf('*') == 0 });
                     }
                 }
 
@@ -332,19 +333,19 @@ namespace UnityQuickSheet
         CellType ParseType(string typedef)
         {
             CellType type;
-            if (string.Compare(typedef, "int") == 0)
+            if (typedef.IndexOf("int") >= 0)
                 type = CellType.Int;
-            if (string.Compare(typedef, "long") == 0)
+            else if (typedef.IndexOf("long") >= 0)
                 type = CellType.Long;
-            else if (string.Compare(typedef, "string") == 0)
+            else if (typedef.IndexOf("string") >= 0)
                 type = CellType.String;
-            else if (string.Compare(typedef, "float") == 0)
+            else if (typedef.IndexOf("float") >= 0)
                 type = CellType.Float;
-            else if (string.Compare(typedef, "double") == 0)
+            else if (typedef.IndexOf("double") >= 0)
                 type = CellType.Double;
-            else if (string.Compare(typedef, "enum") == 0)
+            else if (typedef.IndexOf("enum") >= 0)
                 type = CellType.Enum;
-            else if (string.Compare(typedef, "bool") == 0)
+            else if (typedef.IndexOf("bool") >= 0)
                 type = CellType.Bool;
             else
             {

@@ -52,7 +52,7 @@ MonoBehaviour:
   - type: 1
     name: battleActionList
     isEnable: 0
-    isArray: 0
+    isArray: 1
   excelFilePath: Assets/ExcelTest/Character.xlsx
   SheetNames:
   - CharacterData
