@@ -400,7 +400,7 @@ namespace UnityQuickSheet
         {
             // remove all white space. e.g.) "SkillLevel | uint"
             string cHeader = new string(columnheader.ToCharArray().Where(c => !Char.IsWhiteSpace(c)).ToArray());
-            return new ColumnHeader { name = cHeader, type = type, isArray = cHeader.Contains('+'), OrderNO = order };
+            return new ColumnHeader { name = cHeader, type = type, isArray = cHeader.Contains('*'), OrderNO = order };
         }
     }
 }

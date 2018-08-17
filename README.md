@@ -2,7 +2,7 @@
 Only for optimize purpose...
 
 ## Excel type :
-* **row 0** : field type (if the type is an array, add '+' to the head)
+* **row 0** : field type (if the type is an array, add '*' to the head)
 * **row 1** : describe (costum use, not effect)
 * **row 2** : field name
 * **from row 3** : data
