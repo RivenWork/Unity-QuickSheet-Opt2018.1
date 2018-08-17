@@ -66,7 +66,6 @@ namespace UnityQuickSheet
         }
 
         public string DataFilePath { get; set; }
-        public string ExcelFilePath { get; set; }
 
         [SerializeField]
         private string sheetName;

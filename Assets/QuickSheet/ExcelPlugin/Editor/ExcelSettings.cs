@@ -33,6 +33,8 @@ namespace UnityQuickSheet
         /// </summary>
         public string EditorPath = string.Empty;
 
+        public string DataPath = string.Empty;
+
         /// <summary>
         /// Select currently exist account setting asset file.
         /// </summary>

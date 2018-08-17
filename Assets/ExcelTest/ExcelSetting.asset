@@ -15,74 +15,42 @@ MonoBehaviour:
   scriptFilePath: ExcelTest/Runtime
   editorScriptFilePath: ExcelTest/Editor
   sheetName: Character.xlsx
-  workSheetName: ActionData
+  workSheetName: CharacterData
   columnHeaderList:
   - type: 1
-    name: idName
+    name: characterUniqueName
     isEnable: 0
     isArray: 0
   - type: 1
-    name: name
-    isEnable: 0
-    isArray: 0
-  - type: 0
-    name: actionType
+    name: avatarObjectPrefab
     isEnable: 0
     isArray: 0
   - type: 5
-    name: coldDown
+    name: horizontalSpeed
     isEnable: 0
     isArray: 0
   - type: 5
-    name: distance
-    isEnable: 0
-    isArray: 0
-  - type: 8
-    name: loop
-    isEnable: 0
-    isArray: 0
-  - type: 0
-    name: targetType
-    isEnable: 0
-    isArray: 0
-  - type: 0
-    name: rangeType
-    isEnable: 0
-    isArray: 0
-  - type: 0
-    name: rangeSize
-    isEnable: 0
-    isArray: 0
-  - type: 0
-    name: rangeMaxNumber
-    isEnable: 0
-    isArray: 0
-  - type: 0
-    name: breakPoint
-    isEnable: 0
-    isArray: 0
-  - type: 5
-    name: nextActionAvailableTimeBegin
-    isEnable: 0
-    isArray: 0
-  - type: 5
-    name: nextActionAvailableTimeEnd
+    name: verticalSpeed
     isEnable: 0
     isArray: 0
   - type: 1
-    name: animatorStateName
+    name: idleActionKey
     isEnable: 0
     isArray: 0
   - type: 1
-    name: timeEventList
+    name: deathActionKey
     isEnable: 0
     isArray: 0
   - type: 1
-    name: updateEventList
+    name: walkActionKey
     isEnable: 0
     isArray: 0
   - type: 1
-    name: interruptEvent
+    name: runActionKey
+    isEnable: 0
+    isArray: 0
+  - type: 1
+    name: battleActionList
     isEnable: 0
     isArray: 0
   excelFilePath: Assets/ExcelTest/Character.xlsx
@@ -90,4 +58,4 @@ MonoBehaviour:
   - CharacterData
   - ActionData
   - PropertyData
-  currentSelectedSheet: 1
+  currentSelectedSheet: 0
