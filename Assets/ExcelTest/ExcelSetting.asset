@@ -15,47 +15,27 @@ MonoBehaviour:
   scriptFilePath: ExcelTest/Runtime
   editorScriptFilePath: ExcelTest/Editor
   sheetName: Character.xlsx
-  workSheetName: CharacterData
+  workSheetName: PropertyData
   columnHeaderList:
-  - type: 1
-    name: characterUniqueName
+  - type: 3
+    name: propertyID
     isEnable: 0
     isArray: 0
-  - type: 1
-    name: avatarObjectPrefab
+  - type: 3
+    name: propertyType
     isEnable: 0
     isArray: 0
-  - type: 5
-    name: horizontalSpeed
+  - type: 3
+    name: hpMax
     isEnable: 0
     isArray: 0
-  - type: 5
-    name: verticalSpeed
+  - type: 3
+    name: spMax
     isEnable: 0
     isArray: 0
-  - type: 1
-    name: idleActionKey
-    isEnable: 0
-    isArray: 0
-  - type: 1
-    name: deathActionKey
-    isEnable: 0
-    isArray: 0
-  - type: 1
-    name: walkActionKey
-    isEnable: 0
-    isArray: 0
-  - type: 1
-    name: runActionKey
-    isEnable: 0
-    isArray: 0
-  - type: 1
-    name: battleActionList
-    isEnable: 0
-    isArray: 1
   excelFilePath: Assets/ExcelTest/Character.xlsx
   SheetNames:
   - CharacterData
   - ActionData
   - PropertyData
-  currentSelectedSheet: 0
+  currentSelectedSheet: 2

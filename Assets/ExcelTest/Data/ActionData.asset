@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c23f22c52269d4c9fce58dee424ffe, type: 3}
+  m_Name: ActionData
+  m_EditorClassIdentifier: 
+  SheetName: Assets/ExcelTest/Character.xlsx
+  WorksheetName: ActionData
+  dataArray:
+  - idname: attack_d1
+    name: 
+    actiontype: 1
+    colddown: 0.5
+    distance: 999
+    loop: 0
+    targettype: 1
+    rangetype: 1
+    rangesize: 5
+    rangemaxnumber: 50
+    breakpoint: 3
+    nextactionavailabletimebegin: 0.5
+    nextactionavailabletimeend: 1
+    animatorstatename: attack01_dash01
+    timeeventlist:
+    - 0.35:NormalAttack
+    updateeventlist: []
+    interruptevent: []
+  - idname: attack_2
+    name: "\u8F7B\u62F32"
+    actiontype: 1
+    colddown: 0.5
+    distance: 999
+    loop: 0
+    targettype: 1
+    rangetype: 1
+    rangesize: 5
+    rangemaxnumber: 50
+    breakpoint: 3
+    nextactionavailabletimebegin: 0.5
+    nextactionavailabletimeend: 1
+    animatorstatename: attack02
+    timeeventlist:
+    - 0.25:NormalAttack
+    - 0.47:NormalAttack
+    updateeventlist: []
+    interruptevent: []
+  - idname: attack_3
+    name: "\u8F7B\u62F33"
+    actiontype: 1
+    colddown: 0.5
+    distance: 999
+    loop: 0
+    targettype: 1
+    rangetype: 1
+    rangesize: 5
+    rangemaxnumber: 50
+    breakpoint: 3
+    nextactionavailabletimebegin: 0.5
+    nextactionavailabletimeend: 1
+    animatorstatename: attack03
+    timeeventlist:
+    - 0.26:NormalAttack
+    updateeventlist:
+    - 
+    interruptevent:
+    - 
+  - idname: attack_4
+    name: "\u8F7B\u62F34"
+    actiontype: 1
+    colddown: 0.5
+    distance: 999
+    loop: 0
+    targettype: 1
+    rangetype: 1
+    rangesize: 5
+    rangemaxnumber: 50
+    breakpoint: 3
+    nextactionavailabletimebegin: 0.5
+    nextactionavailabletimeend: 1
+    animatorstatename: attack04
+    timeeventlist:
+    - 0.11:NormalAttack
+    - 0.23:NormalAttack
+    - 0.33:NormalAttack
+    - 0.44:NormalAttack
+    updateeventlist:
+    - 
+    interruptevent:
+    - 
+  - idname: attack_5
+    name: "\u8F7B\u62F35"
+    actiontype: 1
+    colddown: 0.5
+    distance: 999
+    loop: 0
+    targettype: 1
+    rangetype: 1
+    rangesize: 5
+    rangemaxnumber: 50
+    breakpoint: 5
+    nextactionavailabletimebegin: 0.5
+    nextactionavailabletimeend: 1
+    animatorstatename: attack05
+    timeeventlist:
+    - 0.19:NormalAttack
+    updateeventlist:
+    - 
+    interruptevent:
+    - 
+  - idname: attack_d2
+    name: "\u8F7B\u62F36"
+    actiontype: 1
+    colddown: 0.5
+    distance: 999
+    loop: 0
+    targettype: 1
+    rangetype: 1
+    rangesize: 5
+    rangemaxnumber: 50
+    breakpoint: 3
+    nextactionavailabletimebegin: 0.5
+    nextactionavailabletimeend: 1
+    animatorstatename: attack01_dash02
+    timeeventlist:
+    - 0.6:NormalAttack
+    updateeventlist:
+    - 
+    interruptevent:
+    - 
+  - idname: Genko_attack_1
+    name: "\u8F7B\u62F31"
+    actiontype: 1
+    colddown: 0.5
+    distance: 999
+    loop: 0
+    targettype: 1
+    rangetype: 1
+    rangesize: 5
+    rangemaxnumber: 50
+    breakpoint: 3
+    nextactionavailabletimebegin: 0.3
+    nextactionavailabletimeend: 0.8
+    animatorstatename: Attack01
+    timeeventlist:
+    - 0.25:NormalAttack
+    updateeventlist: []
+    interruptevent: []
+  - idname: Genko_attack_2
+    name: "\u8F7B\u62F32"
+    actiontype: 1
+    colddown: 0.5
+    distance: 999
+    loop: 0
+    targettype: 1
+    rangetype: 1
+    rangesize: 5
+    rangemaxnumber: 50
+    breakpoint: 3
+    nextactionavailabletimebegin: 0.25
+    nextactionavailabletimeend: 0.8
+    animatorstatename: Attack02
+    timeeventlist:
+    - 0.12:NormalAttack
+    updateeventlist: []
+    interruptevent: []
+  - idname: Genko_attack_3
+    name: "\u8F7B\u62F33"
+    actiontype: 1
+    colddown: 0.5
+    distance: 999
+    loop: 0
+    targettype: 1
+    rangetype: 1
+    rangesize: 5
+    rangemaxnumber: 50
+    breakpoint: 5
+    nextactionavailabletimebegin: 0.4
+    nextactionavailabletimeend: 0.8
+    animatorstatename: Attack03
+    timeeventlist:
+    - 0.18:NormalAttack
+    updateeventlist: []
+    interruptevent: []
+  - idname: Genko_attack_4
+    name: "\u8F7B\u62F34"
+    actiontype: 1
+    colddown: 0.5
+    distance: 999
+    loop: 0
+    targettype: 1
+    rangetype: 1
+    rangesize: 5
+    rangemaxnumber: 50
+    breakpoint: 5
+    nextactionavailabletimebegin: 0.75
+    nextactionavailabletimeend: 1
+    animatorstatename: Attack04
+    timeeventlist:
+    - 0.33:NormalAttack
+    updateeventlist: []
+    interruptevent: []
