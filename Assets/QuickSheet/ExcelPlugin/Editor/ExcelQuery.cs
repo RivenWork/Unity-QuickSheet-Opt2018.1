@@ -142,7 +142,7 @@ namespace UnityQuickSheet
                         catch (Exception e)
                         {
                             string pos = string.Format("Row[{0}], Cell[{1}]", current, i);
-                            Debug.LogError(string.Format("Excel File {0} Deserialize Exception: {1} at {2}", this.filepath, e.Message, pos));
+                            Debug.LogError(string.Format("Excel File {0} Deserialize Exception: {1} at {2} in {3}", this.filepath, e.Message, pos, sheet.SheetName));
                         }
                     }
                 }
